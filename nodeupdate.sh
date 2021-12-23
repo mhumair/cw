@@ -5,4 +5,4 @@ export NODE_PATH=':/home/master/bin/npm/lib/node_modules'
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 alias n='/home/master/bin/npm/lib/node_modules/bin/n'" >> $HOME/.bash_aliases &&
-npm config set prefix "/home/master/bin/npm/lib/node_modules" &&
+npm config set prefix "/home/master/bin/npm/lib/node_modules"
