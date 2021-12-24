@@ -81,3 +81,6 @@ space-mysql() {
 clear-log-php() {
 	truncate -s 1000 /var/log/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm.log
 }
+apm-all() {
+	cd /home/master/applications;for A in $(ls | awk '{print $NF}'); do echo $A && apm traffic -s $A -l 1d; done
+}
