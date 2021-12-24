@@ -81,6 +81,15 @@ space-mysql() {
 clear-log-php() {
 	truncate -s 1000 /var/log/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm.log
 }
-apm-all() {
+apm-all-day() {
 	cd /home/master/applications;for A in $(ls | awk '{print $NF}'); do echo $A && apm traffic -s $A -l 1d; done
+}
+apm-all-hour() {
+	cd /home/master/applications;for A in $(ls | awk '{print $NF}'); do echo $A && apm traffic -s $A -l 1h; done
+}
+apm-all-min() {
+	cd /home/master/applications;for A in $(ls | awk '{print $NF}'); do echo $A && apm traffic -s $A -l 15m; done
+}
+apm-app-day() {
+	apm traffic -s $(grep -lr "$(echo -e "$1" | sed -e 's|^[^/]*//| |' -e 's|/.*$||')" */conf | awk -F "/" 'END{print $1}') -l 1d
 }
