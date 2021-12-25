@@ -134,7 +134,6 @@ fastcgi-timeout() {
 	/etc/init.d/apache2 restart
 	/etc/init.d/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm restart
 }
-
 find-inodes() {
 	for i in ./*; do echo $i; find $i |wc -l; done
 }
