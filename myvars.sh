@@ -134,3 +134,13 @@ fastcgi-timeout() {
 	/etc/init.d/apache2 restart
 	/etc/init.d/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm restart
 }
+
+find-inodes() {
+	for i in ./*; do echo $i; find $i |wc -l; done
+}
+clear-inodes() { 
+	find ./ -type f -mtime +1 -delete
+}
+sed-searchreplace() { 
+	grep -lr '$1' | xargs sed -i 's|$1|$2|g'
+}
