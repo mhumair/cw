@@ -93,3 +93,35 @@ apm-all-min() {
 apm-app-day() {
 	apm traffic -s $(grep -lr "$(echo -e "$1" | sed -e 's|^[^/]*//| |' -e 's|/.*$||')" */conf | awk -F "/" 'END{print $1}') -l 1d
 }
+
+apm-app-hour() {
+	apm traffic -s $(grep -lr "$(echo -e "$1" | sed -e 's|^[^/]*//| |' -e 's|/.*$||')" */conf | awk -F "/" 'END{print $1}') -l 1h
+}
+
+apm-app-min() {
+	apm traffic -s $(grep -lr "$(echo -e "$1" | sed -e 's|^[^/]*//| |' -e 's|/.*$||')" */conf | awk -F "/" 'END{print $1}') -l 15m
+}
+restart-nginx() {
+	/etc/init.d/nginx restart
+}
+restart-php() {
+	/etc/init.d/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm restart
+}
+restart-mysql() {
+	/etc/init.d/mysql restart
+}
+restart-nginx() {
+	/etc/init.d/memcached restart
+}
+restart-redis() { 
+	/etc/init.d/redis-server restart 2> /dev/null
+}
+reset-services () {
+	/etc/init.d/nginx restart
+	/etc/init.d/varnish restart
+	/etc/init.d/apache2 restart
+	/etc/init.d/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm restart
+	/etc/init.d/mysql restart
+	/etc/init.d/memcached restart
+	/etc/init.d/redis-server restart 2> /dev/null
+} 
