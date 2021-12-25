@@ -124,4 +124,13 @@ reset-services () {
 	/etc/init.d/mysql restart
 	/etc/init.d/memcached restart
 	/etc/init.d/redis-server restart 2> /dev/null
-} 
+}
+mysql-create-dumps () {
+	cd /home/master/applications;mkdir ../dumps;for A in $(ls | awk '{print $NF}'); do echo $A && mysqldump $A > ../dumps/$A ; done
+}  
+fastcgi-timeout() {
+	cd /etc/apache2/fcgi/
+	sed -i -e s'#</IfModule>#ProxyTimeout 3600\n</IfModule>#'g $(grep -lr "$(echo -e "$1" | sed -e 's|^[^/]*//| |' -e 's|/.*$||')" */conf | awk -F "/" 'END{print $1}').conf
+	/etc/init.d/apache2 restart
+	/etc/init.d/php$(php -v  | head -n 1 | cut -d " " -f2 | cut -d "." -f1,2)-fpm restart
+}
