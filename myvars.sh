@@ -110,7 +110,7 @@ restart-php() {
 restart-mysql() {
 	/etc/init.d/mysql restart
 }
-restart-nginx() {
+restart-memcached() {
 	/etc/init.d/memcached restart
 }
 restart-redis() { 
