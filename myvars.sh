@@ -143,3 +143,11 @@ clear-inodes() {
 sed-searchreplace() { 
 	grep -lr '$1' | xargs sed -i 's|$1|$2|g'
 }
+create_php_info() { 
+	echo "<?php
+// Show all information, defaults to INFO_ALL
+phpinfo();
+
+?>" >> phpinfo.php
+
+}
