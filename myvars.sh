@@ -1,4 +1,15 @@
 cd /home/$(cat /etc/hostname)/
+mkdir /var/cw/systeam/.vim-backup > /dev/null 2>&1
+cat <<- _EOF_ > /root/.vimrc
+set backup
+set backupdir=/var/cw/systeam/.vim-backup
+set writebackup
+set backupcopy=yes
+au BufWritePre * let &bex = '@' . strftime("%F-%H-%M")
+_EOF_
+
+
+
 st() {
   if [[ -z "$ORIG" ]]; then
     ORIG=$PS1
