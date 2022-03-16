@@ -162,3 +162,17 @@ phpinfo();
 ?>" >> phpinfo.php
 
 }
+clear_wp_cache() {
+	rm -rf ./wp-content/cache/*
+	wp cache flush all
+	wp redis flush all
+	/etc/init.d/redis restart
+	/etc/init.d/varnish restart
+	/etc/init.d/nginx restart
+}
+clear_redis_varnish() { 
+	/etc/init.d/redis restart
+	/etc/init.d/varnish restart
+}
+
+
