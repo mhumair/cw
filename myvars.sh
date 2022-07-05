@@ -164,8 +164,8 @@ phpinfo();
 }
 clear_wp_cache() {
 	rm -rf ./wp-content/cache/*
-	wp cache flush all
-	wp redis flush all
+	wp --skip-plugins --skip-themes cache flush all
+	wp --skip-plugins --skip-themes redis flush all
 	/etc/init.d/redis-server restart
 	/etc/init.d/varnish restart
 	/etc/init.d/nginx restart
