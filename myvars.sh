@@ -174,5 +174,7 @@ clear_redis_varnish() {
 	/etc/init.d/redis-server restart
 	/etc/init.d/varnish restart
 }
-
+get_domain() { 
+	cat /home/master/applications/$1/conf/server.nginx
+}
 
