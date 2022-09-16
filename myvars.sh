@@ -179,4 +179,8 @@ get_domain() {
 }
 set_ansible() {
 	echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEE3dYCZe/NwYuaCAZ/b1+ELDWqeNN1ozXXE7EuhYaSb8wQAZqTHtz1Ha+cRWwbQrXV6bVVnk4y3hV3/djkT1zq8mCzugyt1LI1oRlONRQrvUWb4/rkd1FpNT9Nu37Ds3X5GaylHLZMaptoWc6VFI9Utm97/3FCclCznIfhpNaq+nt2oLtkasLwDDb84qQt/Q12WYUyhrgtoRtHfG1DU+JOAfGwkV822fWTCfoQqx8ek3FbQaLxKb8CoQF91cQUhXaKYPDf+kwgCs9EiPM8XCk/WrgDXQeHGrOTJd/R+Ef6ecTxOKmOZu4NsoVUZdPMXL+PwqhJlheX0nrhOFcCJUDuoFm/ZAeIED2yUnpO2wlDLdtSpclbpFWqQCGsetVKCIGxYYrvvKI7KH74ZA8ddMEFQWpPkNhrMaJ7/yzZOg/s4sGMKaG2xmtm/leBlaVORBoQlQWn5t/rk6yl8ifdYnj7ae5dUqM3qJy+7SSF/pRQxI5Yo18mYeMUBjLAJAjemc= humair@clw-po-humair" >> /var/cw/ansible/.ssh/authorized_keys
+	hostname
+}
+get_playbookversion() {
+	cat /etc/ansible/facts.d/playbook_version.fact
 }
