@@ -189,3 +189,44 @@ set_ansible_ssh_hosts() {
 get_playbookversion() {
 	cat /etc/ansible/facts.d/playbook_version.fact
 }
+get_varnish_status() {
+	systemctl status varnish
+}
+get_elasticsearch_status() {
+	systemctl status elasticsearch
+}
+get_elasticsearch_logs() {
+	journalctl -u elasticsearch
+}
+get_elasticsearch_version() {
+	cat /etc/ansible/facts.d/packages.fact
+}
+get_os() {
+	lsb_release -a
+}	
+check_services() {
+	sudo /etc/sensu/plugins/webstack-service.rb --check handler
+}
+check_varnish_systemd() {
+	cat /lib/systemd/system/varnish.service 
+}
+fix_varnish() {
+	get_os
+	systemctl daemon-reload
+	systemctl restart varnish
+	sudo /etc/sensu/plugins/webstack-service.rb --check handler
+	cat /lib/systemd/system/varnish.service 
+	get_varnish_status
+}
+set_remote_ansible() {
+	echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5rDZGCn2+KBso9WGsOEHcBkGToiuyvJBRexo4A1mNFODKcKREWflu4tgrFpuPLULdHPR6CLE58DyUhO6T4k27+WE4XuzPNjc+YlFRAhECN518uxJYWMM/dtPZgWtXd+6wtTn5kUl1dwYVFCdy0c+W0/T8/o783EWMfZyDQwIkM47RDy/KJnbIbsL2H9l8NeBJ7KOtPy36Ig/5/t+RL0MzuE/n8xlgWi1Exim0CwVkCmhF7bi2KPyS6Otl4VhvznR2QXxMa7eIOJR86NKGJIrTRkopm8dcJyyz+5CQok6YiO6ov5o1GCP6ng73user23YgbBbQlYHXhPHmJEoC0YlB root@864179.cloudwaysapps.com" >> /var/cw/ansible/.ssh/authorized_keys
+        hostname
+
+}
+get_provider() {
+	cat /etc/ansible/facts.d/cloud_provider.fact 
+}
+set_hostname_debug() {
+	hostnamectl set-hostname debug-$(hostname)
+}
+
